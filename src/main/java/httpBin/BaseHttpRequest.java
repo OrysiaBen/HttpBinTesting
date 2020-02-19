@@ -30,9 +30,7 @@ public class BaseHttpRequest {
         this.requestHeaders = requestHeaders;
     }
 
-    public String getRequest(String url) {
-        httpRequestBase = new HttpGet(url);
-        this.requestHeaders.forEach((key, value) -> httpRequestBase.setHeader(key, value));
+    public void HandleResponse() {
         try (CloseableHttpResponse response = httpClient.execute(httpRequestBase)) {
             this.response = response.toString();
             this.statusCode = response.getStatusLine().getStatusCode();
@@ -45,6 +43,12 @@ public class BaseHttpRequest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getRequest(String url) {
+        httpRequestBase = new HttpGet(url);
+        this.requestHeaders.forEach((key, value) -> httpRequestBase.setHeader(key, value));
+        HandleResponse();
         return this.response;
     }
 
@@ -59,18 +63,7 @@ public class BaseHttpRequest {
         httpRequestBase.setEntity(stringEntity);
         this.requestHeaders.forEach((key, value) -> httpRequestBase.setHeader(key, value));
         httpRequestBase.setHeader("Content-type", "application/json");
-        try (CloseableHttpResponse response = httpClient.execute(httpRequestBase)) {
-            this.response = response.toString();
-            this.statusCode = response.getStatusLine().getStatusCode();
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                this.response = EntityUtils.toString(entity);
-            }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HandleResponse();
         return this.response;
     }
 
@@ -81,5 +74,24 @@ public class BaseHttpRequest {
     public String parseJsonObject(String key) {
         JSONObject json = new JSONObject(response);
         return json.get(key).toString();
+    }
+
+    public String putRequest(String url, String body) {
+        HttpPut httpRequestBase = new HttpPut(url);
+        StringEntity stringEntity = null;
+        try {
+            stringEntity = new StringEntity(body);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        this.requestHeaders.forEach((key, value) -> httpRequestBase.setHeader(key, value));
+        httpRequestBase.setHeader("Content-type", "application/json");
+        httpRequestBase.setEntity(stringEntity);
+        HandleResponse();
+        return this.response;
+    }
+
+    public String getResponse() {
+        return this.response;
     }
 }
