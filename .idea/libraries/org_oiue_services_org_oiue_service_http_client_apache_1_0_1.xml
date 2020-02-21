@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="org.oiue.services:org.oiue.service.http.client.apache:1.0.11" type="repository">
+  <library name="org.oiue.services:org.oiue.service.http.client.apache:1.0.1" type="repository">
     <properties maven-id="org.oiue.services:org.oiue.service.http.client.apache:1.0.1" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/oiue/services/org.oiue.service.http.client.apache/1.0.1/org.oiue.service.http.client.apache-1.0.1.jar!/" />

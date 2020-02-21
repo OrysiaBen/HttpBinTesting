@@ -19,7 +19,7 @@ Academy SoftServe we used this and it is the most suitable for me.
 The structure of my project is as follows:
 1) in folder java I created 2 package:
 
-	* httpBin (this package has 3 clases):
+	* httpBinClient (this package has 3 clases):
   
 		** Authorization (this is from website: http://httpbin.org)
     
