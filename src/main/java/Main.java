@@ -1,4 +1,4 @@
-import httpBin.HttpBinClient;
+import httpBinClient.HttpBinClient;
 
 import static utils.HttpBinURL.BASE_URL;
 
