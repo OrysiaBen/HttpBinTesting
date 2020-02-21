@@ -42,10 +42,10 @@ public class BaseHttpRequest {
             this.response = response.toString();
             this.statusCode = response.getStatusLine().getStatusCode();
             logger.info("Response code: " + this.statusCode);
-            logger.info("Response: " + this.response);
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 this.response = EntityUtils.toString(entity);
+                logger.info("Response: " + this.response);
             }
         } catch (ClientProtocolException e) {
             logger.error("When handle response ClientProtocolException error occured " + e);
